@@ -1,10 +1,3 @@
-//
-//  UserDefaultsManager.swift
-//  JEANELLE
-//
-//  Created by Zhanel  on 17.12.2025.
-//
-
 import Foundation
 
 final class UserDefaultsManager {
@@ -14,8 +7,8 @@ final class UserDefaultsManager {
     private let defaults = UserDefaults.standard
 
     private enum Keys {
-        static let favorites = "jeanelle_favorites_products"   // [Product]
-        static let cart = "jeanelle_cart_items"                // [CartItem]
+        static let favorites = "jeanelle_favorites_products"
+        static let cart = "jeanelle_cart_items"
         static let profileName = "jeanelle_profile_name"
         static let profileEmail = "jeanelle_profile_email"
     }
@@ -44,6 +37,11 @@ final class UserDefaultsManager {
 
     func isFavorite(_ productId: Int) -> Bool {
         loadFavorites().contains(where: { $0.id == productId })
+    }
+
+    // Новый метод — возвращает все избранные продукты
+    func getFavoriteProducts() -> [Product] {
+        return loadFavorites()
     }
 
     // MARK: - Cart
@@ -114,4 +112,3 @@ final class UserDefaultsManager {
         defaults.removeObject(forKey: Keys.profileEmail)
     }
 }
-

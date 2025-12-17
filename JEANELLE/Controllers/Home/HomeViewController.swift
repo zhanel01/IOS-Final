@@ -92,6 +92,12 @@ extension HomeViewController: UICollectionViewDataSource {
         let isFavorite = UserDefaultsManager.shared.isFavorite(product.id)
 
         cell.configure(with: product, isFavorite: isFavorite)
+        cell.onFavoriteTap = { [weak self] in
+            guard let self else { return }
+            UserDefaultsManager.shared.toggleFavorite(product)
+            self.collectionView.reloadItems(at: [indexPath])
+        }
+
         return cell
     }
 }

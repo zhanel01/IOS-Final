@@ -5,7 +5,13 @@
 //  Created by Zhanel  on 17.12.2025.
 //
 
+//
+//  ProductCollectionViewCell.swift
+//  JEANELLE
+//
+
 import UIKit
+import Kingfisher
 
 class ProductCollectionViewCell: UICollectionViewCell {
 
@@ -16,83 +22,59 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
 
-    private var currentImageURL: String?
+    // MARK: - Stored product
+    private var product: Product?
 
+    // 👇 ДОБАВЛЯЕМ ЭТО ЧТОБЫ НЕ БЫЛО ОШИБКИ
+    var onFavoriteTap: (() -> Void)?
+
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        productImageView.image = nil
-        currentImageURL = nil
-        favoriteButton.isSelected = false
-    }
-
-    // MARK: - Setup
-
     private func setupUI() {
-        contentView.layer.cornerRadius = 14
+        contentView.layer.cornerRadius = 12
         contentView.layer.masksToBounds = true
-        contentView.backgroundColor = UIColor.secondarySystemBackground
 
         productImageView.contentMode = .scaleAspectFill
         productImageView.clipsToBounds = true
+    }
 
-        brandLabel.font = UIFont.systemFont(ofSize: 12, weight: .medium)
-        brandLabel.textColor = .secondaryLabel
+    // MARK: - Configure Cell
+    func configure(with product: Product, isFavorite: Bool) {
+        self.product = product
 
-        nameLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-        nameLabel.textColor = .label
+        brandLabel.text = product.brand?.capitalized ?? "Unknown"
+        nameLabel.text = product.name
         nameLabel.numberOfLines = 2
 
-        priceLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        priceLabel.textColor = .systemPink
+        let price = product.priceValue
+        priceLabel.text = price == 0 ? "—" : "\(price)$"
 
-        favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        favoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .selected)
-        favoriteButton.tintColor = .systemPink
-        favoriteButton.isUserInteractionEnabled = false // логику добавим позже
-    }
-
-    // MARK: - Configure
-
-    func configure(with product: Product, isFavorite: Bool) {
-        brandLabel.text = product.brand?.uppercased() ?? "UNKNOWN"
-        nameLabel.text = product.name
-
-        if let price = product.price, !price.isEmpty {
-            priceLabel.text = "\(price) \(product.currency ?? "$")"
+        // MARK: - Image loading
+        if let urlString = product.imageLink,
+           let url = URL(string: urlString) {
+            productImageView.kf.setImage(with: url)
         } else {
-            priceLabel.text = "—"
+            productImageView.image = UIImage(named: "placeholder")
         }
 
-        favoriteButton.isSelected = isFavorite
-
-        loadImage(from: product.imageLink)
+        updateFavoriteIcon(isFavorite)
     }
 
-    // MARK: - Image loading
+    // MARK: - Update heart icon
+    private func updateFavoriteIcon(_ isFav: Bool) {
+        let imageName = isFav ? "heart.fill" : "heart"
+        favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
+        favoriteButton.tintColor = isFav ? .systemRed : .darkGray
+    }
 
-    private func loadImage(from urlString: String?) {
-        productImageView.image = nil
-        guard let urlString, let url = URL(string: urlString) else { return }
+    // MARK: - Favorite button action
+    @IBAction func favoriteTapped(_ sender: UIButton) {
 
-        currentImageURL = urlString
-
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
-            guard
-                let self = self,
-                let data,
-                let image = UIImage(data: data),
-                self.currentImageURL == urlString
-            else { return }
-
-            DispatchQueue.main.async {
-                self.productImageView.image = image
-            }
-        }.resume()
+        // вызываем замыкание → HomeViewController сам обновит UserDefaults
+        onFavoriteTap?()
     }
 }
-
