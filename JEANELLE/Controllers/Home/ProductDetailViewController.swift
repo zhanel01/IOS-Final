@@ -22,11 +22,9 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var plusButton: UIButton!
 
-
     var product: Product!
     private var quantity: Int = 0
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,7 +40,6 @@ class ProductDetailViewController: UIViewController {
         descriptionTextView?.isEditable = false
     }
 
-   
     private func fillData() {
         brandLabel.text = product.brand?.capitalized ?? "Unknown"
         nameLabel.text = product.name
@@ -51,8 +48,7 @@ class ProductDetailViewController: UIViewController {
         let price = product.priceValue
         priceLabel.text = price == 0 ? "—" : "\(price)$"
 
-        if let urlString = product.imageLink,
-           let url = URL(string: urlString) {
+        if let urlString = product.imageLink, let url = URL(string: urlString) {
             productImageView.kf.setImage(with: url)
         } else {
             productImageView.image = UIImage(named: "placeholder")
@@ -61,10 +57,7 @@ class ProductDetailViewController: UIViewController {
             product.productDescription?.isEmpty == false
             ? product.productDescription
             : "No description available."
-
-
     }
-
 
     @IBAction func favoriteTapped(_ sender: UIButton) {
         UserDefaultsManager.shared.toggleFavorite(product)
@@ -78,7 +71,6 @@ class ProductDetailViewController: UIViewController {
         favoriteButton?.tintColor = isFav ? .systemRed : .darkGray
     }
 
-    
     @IBAction func addToCartTapped(_ sender: UIButton) {
         quantity = 1
         UserDefaultsManager.shared.addToCart(product)
