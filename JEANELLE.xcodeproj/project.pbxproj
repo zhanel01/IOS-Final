@@ -6,6 +6,20 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		29F9784C2EF20C58006201BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29F978432EF20C58006201BF /* Assets.xcassets */; };
+		29F9784D2EF20C58006201BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29F978472EF20C58006201BF /* LaunchScreen.storyboard */; };
+		29F9784F2EF20C58006201BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29F978492EF20C58006201BF /* Main.storyboard */; };
+		29F978502EF20C58006201BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F978422EF20C58006201BF /* AppDelegate.swift */; };
+		29F978512EF20C58006201BF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F9784A2EF20C58006201BF /* SceneDelegate.swift */; };
+		29F978522EF20C58006201BF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F978442EF20C58006201BF /* HomeViewController.swift */; };
+		29F9785A2EF20F26006201BF /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F978592EF20F26006201BF /* Product.swift */; };
+		29F9785C2EF20F42006201BF /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F9785B2EF20F42006201BF /* CartItem.swift */; };
+		29F9785E2EF20F6B006201BF /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F9785D2EF20F6B006201BF /* APIService.swift */; };
+		29F978602EF20FA7006201BF /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F9785F2EF20FA7006201BF /* UserDefaultsManager.swift */; };
+		29F978642EF21E45006201BF /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F978632EF21E45006201BF /* ProductCollectionViewCell.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		29F0580A2EF1F90900A3D342 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,27 +41,21 @@
 		29F057F32EF1F90800A3D342 /* JEANELLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JEANELLE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29F058092EF1F90900A3D342 /* JEANELLETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JEANELLETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		29F058132EF1F90900A3D342 /* JEANELLEUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JEANELLEUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		29F978422EF20C58006201BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		29F978432EF20C58006201BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		29F978442EF20C58006201BF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		29F978452EF20C58006201BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29F978462EF20C58006201BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		29F978482EF20C58006201BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		29F9784A2EF20C58006201BF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		29F978592EF20F26006201BF /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		29F9785B2EF20F42006201BF /* CartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItem.swift; sourceTree = "<group>"; };
+		29F9785D2EF20F6B006201BF /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		29F9785F2EF20FA7006201BF /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		29F978632EF21E45006201BF /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		29F0581B2EF1F90900A3D342 /* Exceptions for "JEANELLE" folder in "JEANELLE" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 29F057F22EF1F90800A3D342 /* JEANELLE */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		29F057F52EF1F90800A3D342 /* JEANELLE */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				29F0581B2EF1F90900A3D342 /* Exceptions for "JEANELLE" folder in "JEANELLE" target */,
-			);
-			path = JEANELLE;
-			sourceTree = "<group>";
-		};
 		29F0580C2EF1F90900A3D342 /* JEANELLETests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = JEANELLETests;
@@ -88,7 +96,7 @@
 		29F057EA2EF1F90800A3D342 = {
 			isa = PBXGroup;
 			children = (
-				29F057F52EF1F90800A3D342 /* JEANELLE */,
+				29F9784B2EF20C58006201BF /* JEANELLE */,
 				29F0580C2EF1F90900A3D342 /* JEANELLETests */,
 				29F058162EF1F90900A3D342 /* JEANELLEUITests */,
 				29F057F42EF1F90800A3D342 /* Products */,
@@ -105,6 +113,89 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		29F9784B2EF20C58006201BF /* JEANELLE */ = {
+			isa = PBXGroup;
+			children = (
+				29F978582EF20EBA006201BF /* Utilities */,
+				29F978572EF20EAD006201BF /* Controllers */,
+				29F978562EF20E9D006201BF /* Views */,
+				29F978552EF20E5D006201BF /* Storage */,
+				29F978542EF20E0B006201BF /* Networking */,
+				29F978532EF20DEF006201BF /* Models */,
+				29F978422EF20C58006201BF /* AppDelegate.swift */,
+				29F978432EF20C58006201BF /* Assets.xcassets */,
+				29F978452EF20C58006201BF /* Info.plist */,
+				29F978472EF20C58006201BF /* LaunchScreen.storyboard */,
+				29F978492EF20C58006201BF /* Main.storyboard */,
+				29F9784A2EF20C58006201BF /* SceneDelegate.swift */,
+			);
+			path = JEANELLE;
+			sourceTree = "<group>";
+		};
+		29F978532EF20DEF006201BF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				29F978592EF20F26006201BF /* Product.swift */,
+				29F9785B2EF20F42006201BF /* CartItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		29F978542EF20E0B006201BF /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				29F9785D2EF20F6B006201BF /* APIService.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		29F978552EF20E5D006201BF /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				29F9785F2EF20FA7006201BF /* UserDefaultsManager.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		29F978562EF20E9D006201BF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				29F978622EF21D6E006201BF /* Home */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		29F978572EF20EAD006201BF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				29F978612EF21B9D006201BF /* Home */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		29F978582EF20EBA006201BF /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		29F978612EF21B9D006201BF /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				29F978442EF20C58006201BF /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		29F978622EF21D6E006201BF /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				29F978632EF21E45006201BF /* ProductCollectionViewCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +210,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				29F057F52EF1F90800A3D342 /* JEANELLE */,
 			);
 			name = JEANELLE;
 			packageProductDependencies = (
@@ -225,6 +313,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29F9784C2EF20C58006201BF /* Assets.xcassets in Resources */,
+				29F9784D2EF20C58006201BF /* LaunchScreen.storyboard in Resources */,
+				29F9784F2EF20C58006201BF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +340,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29F978502EF20C58006201BF /* AppDelegate.swift in Sources */,
+				29F9785A2EF20F26006201BF /* Product.swift in Sources */,
+				29F978642EF21E45006201BF /* ProductCollectionViewCell.swift in Sources */,
+				29F978512EF20C58006201BF /* SceneDelegate.swift in Sources */,
+				29F978602EF20FA7006201BF /* UserDefaultsManager.swift in Sources */,
+				29F9785C2EF20F42006201BF /* CartItem.swift in Sources */,
+				29F9785E2EF20F6B006201BF /* APIService.swift in Sources */,
+				29F978522EF20C58006201BF /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +379,25 @@
 			targetProxy = 29F058142EF1F90900A3D342 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		29F978472EF20C58006201BF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29F978462EF20C58006201BF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		29F978492EF20C58006201BF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29F978482EF20C58006201BF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		29F0581D2EF1F90900A3D342 /* Debug */ = {
