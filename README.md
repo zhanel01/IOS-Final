@@ -3,7 +3,7 @@
 
 ## 📱 Project Overview
 
-**JEANELLE** is a modern iOS application developed as a **final project for the iOS Development Introduction course**.  
+**JEANELLE** is a modern iOS application developed as a **final project for the iOS Development course**.  
 The app represents an **online cosmetics marketplace**, allowing users to browse products, manage favorites, add items to a cart, and control their personal profile.
 
 The main goal of this project is to demonstrate practical skills in:
