@@ -15,20 +15,19 @@ import Kingfisher
 
 class ProductCollectionViewCell: UICollectionViewCell {
 
-    // MARK: - Outlets
+    
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var brandLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
 
-    // MARK: - Stored product
     private var product: Product?
 
-    // 👇 ДОБАВЛЯЕМ ЭТО ЧТОБЫ НЕ БЫЛО ОШИБКИ
+  
     var onFavoriteTap: (() -> Void)?
 
-    // MARK: - Lifecycle
+
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
@@ -42,7 +41,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         productImageView.clipsToBounds = true
     }
 
-    // MARK: - Configure Cell
+    
     func configure(with product: Product, isFavorite: Bool) {
         self.product = product
 
@@ -53,7 +52,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         let price = product.priceValue
         priceLabel.text = price == 0 ? "—" : "\(price)$"
 
-        // MARK: - Image loading
+
         if let urlString = product.imageLink,
            let url = URL(string: urlString) {
             productImageView.kf.setImage(with: url)
@@ -64,17 +63,16 @@ class ProductCollectionViewCell: UICollectionViewCell {
         updateFavoriteIcon(isFavorite)
     }
 
-    // MARK: - Update heart icon
+
     private func updateFavoriteIcon(_ isFav: Bool) {
         let imageName = isFav ? "heart.fill" : "heart"
         favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
         favoriteButton.tintColor = isFav ? .systemRed : .darkGray
     }
 
-    // MARK: - Favorite button action
+  
     @IBAction func favoriteTapped(_ sender: UIButton) {
 
-        // вызываем замыкание → HomeViewController сам обновит UserDefaults
         onFavoriteTap?()
     }
 }

@@ -18,7 +18,7 @@ struct Product: Codable, Identifiable, Equatable {
     let productType: String?
     let productDescription: String?
 
-    // Convenience: price as Double for totals
+   
     var priceValue: Double {
         guard let price, let v = Double(price.trimmingCharacters(in: .whitespacesAndNewlines)) else { return 0 }
         return v

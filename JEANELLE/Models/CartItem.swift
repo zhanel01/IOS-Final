@@ -8,7 +8,7 @@
 import Foundation
 
 struct CartItem: Codable, Equatable, Identifiable {
-    let id: Int              // same as product id (for Identifiable)
+    let id: Int              
     let product: Product
     var quantity: Int
 

@@ -9,13 +9,12 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
 
-    // MARK: - Outlets
+   
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    // MARK: - Data
+
+   
     private var favoriteProducts: [Product] = []
 
-    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,28 +25,25 @@ class FavoritesViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadFavorites()      // обновлять каждый раз
+        loadFavorites()
         collectionView.reloadData()
     }
 
-    // MARK: - Load favorites
     private func loadFavorites() {
         favoriteProducts = UserDefaultsManager.shared.getFavoriteProducts()
     }
 
-    // MARK: - Collection setup
     private func setupCollectionView() {
         if let flow = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flow.estimatedItemSize = .zero
         }
 
-        collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.delegate = self
     }
 }
 
 
-// MARK: - UICollectionViewDataSource
 extension FavoritesViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView,
@@ -69,10 +65,8 @@ extension FavoritesViewController: UICollectionViewDataSource {
 
         cell.configure(with: product, isFavorite: isFavorite)
 
-        // удаление из избранного
         cell.onFavoriteTap = { [weak self] in
-            guard let self else { return }
-
+            guard let self = self else { return }
             UserDefaultsManager.shared.toggleFavorite(product)
             self.loadFavorites()
             self.collectionView.reloadData()
@@ -83,7 +77,24 @@ extension FavoritesViewController: UICollectionViewDataSource {
 }
 
 
-// MARK: - UICollectionViewDelegateFlowLayout (2 колонки)
+
+extension FavoritesViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+
+        let product = favoriteProducts[indexPath.item]
+
+        let vc = storyboard?.instantiateViewController(
+            withIdentifier: "ProductDetailViewController"
+        ) as! ProductDetailViewController
+
+        vc.product = product
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+
 extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView,
@@ -91,8 +102,7 @@ extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         let spacing: CGFloat = 12
-        let totalSpacing = spacing * 3
-        let width = (collectionView.bounds.width - totalSpacing) / 2
+        let width = (collectionView.bounds.width - spacing * 3) / 2
 
         return CGSize(width: width, height: width * 1.6)
     }
@@ -100,18 +110,21 @@ extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
+
         return UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+
         return 12
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+
         return 12
     }
 }

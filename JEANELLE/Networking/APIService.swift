@@ -20,10 +20,7 @@ final class APIService {
 
     private let baseURLString = "https://makeup-api.herokuapp.com/api/v1/products.json"
 
-    /// Fetch products from Makeup API.
-    /// - Parameters:
-    ///   - productType: e.g. "lipstick", "blush", "foundation"
-    ///   - brand: e.g. "maybelline"
+    
     func fetchProducts(productType: String? = nil,
                        brand: String? = nil,
                        completion: @escaping (Result<[Product], APIError>) -> Void) {

@@ -13,7 +13,6 @@ final class UserDefaultsManager {
         static let profileEmail = "jeanelle_profile_email"
     }
 
-    // MARK: - Favorites
 
     func loadFavorites() -> [Product] {
         guard let data = defaults.data(forKey: Keys.favorites) else { return [] }
@@ -39,13 +38,12 @@ final class UserDefaultsManager {
         loadFavorites().contains(where: { $0.id == productId })
     }
 
-    // Новый метод — возвращает все избранные продукты
+    
     func getFavoriteProducts() -> [Product] {
         return loadFavorites()
     }
 
-    // MARK: - Cart
-
+    
     func loadCart() -> [CartItem] {
         guard let data = defaults.data(forKey: Keys.cart) else { return [] }
         return (try? JSONDecoder().decode([CartItem].self, from: data)) ?? []
@@ -92,7 +90,7 @@ final class UserDefaultsManager {
         saveCart([])
     }
 
-    // MARK: - Profile
+  
 
     func saveProfile(name: String, email: String) {
         defaults.set(name, forKey: Keys.profileName)

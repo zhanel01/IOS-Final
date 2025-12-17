@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  JEANELLE
 //
 //  Created by Zhanel  on 17.12.2025.
@@ -10,16 +10,16 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    // MARK: - Outlets
+   
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
 
-    // MARK: - Data
+    
     private var products: [Product] = []
     private var filteredProducts: [Product] = []
 
-    // MARK: - Life cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,8 +28,15 @@ class HomeViewController: UIViewController {
         setupSearch()
         loadProducts()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+    }
 
-    // MARK: - UI Setup
+    
+    
+
     private func setupUI() {
         navigationItem.title = "JEANELLE"
 
@@ -38,10 +45,8 @@ class HomeViewController: UIViewController {
         bannerImageView.clipsToBounds = true
     }
 
-    // MARK: - CollectionView Setup
+ 
     private func setupCollectionView() {
-
-        // ВАЖНО — выключаем автоматическую высоту
         if let flow = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flow.estimatedItemSize = .zero
         }
@@ -50,14 +55,12 @@ class HomeViewController: UIViewController {
         collectionView.delegate = self
     }
 
-    // MARK: - Search Setup
     private func setupSearch() {
         searchBar.delegate = self
     }
 
-    // MARK: - Load API Data
+    
     private func loadProducts() {
-
         APIService.shared.fetchProducts(productType: "lipstick") { [weak self] result in
             guard let self = self else { return }
 
@@ -75,25 +78,29 @@ class HomeViewController: UIViewController {
 }
 
 
-// MARK: - UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         return filteredProducts.count
     }
 
     func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+                        cellForItemAt indexPath: IndexPath)
+    -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell",
-                                                      for: indexPath) as! ProductCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "ProductCell",
+            for: indexPath
+        ) as! ProductCollectionViewCell
 
         let product = filteredProducts[indexPath.item]
         let isFavorite = UserDefaultsManager.shared.isFavorite(product.id)
 
         cell.configure(with: product, isFavorite: isFavorite)
+
         cell.onFavoriteTap = { [weak self] in
-            guard let self else { return }
+            guard let self = self else { return }
             UserDefaultsManager.shared.toggleFavorite(product)
             self.collectionView.reloadItems(at: [indexPath])
         }
@@ -103,19 +110,33 @@ extension HomeViewController: UICollectionViewDataSource {
 }
 
 
-// MARK: - UICollectionViewDelegateFlowLayout
+
+extension HomeViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+
+        let product = filteredProducts[indexPath.item]
+
+        let vc = storyboard?.instantiateViewController(
+            withIdentifier: "ProductDetailViewController"
+        ) as! ProductDetailViewController
+
+        vc.product = product
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+
+
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
-    // ГЛАВНОЕ — 2 КОЛОНКИ
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         let spacing: CGFloat = 12
-
-        // left + right + межколоночный
-        let totalSpacing: CGFloat = spacing * 3
-
+        let totalSpacing = spacing * 3
         let width = (collectionView.bounds.width - totalSpacing) / 2
 
         return CGSize(width: width, height: width * 1.6)
@@ -124,7 +145,6 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-
         return UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
     }
 
@@ -142,7 +162,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 }
 
 
-// MARK: - UISearchBarDelegate
+
 extension HomeViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -157,7 +177,6 @@ extension HomeViewController: UISearchBarDelegate {
                 (product.brand?.lowercased().contains(lower) ?? false)
             }
         }
-
         collectionView.reloadData()
     }
 }
